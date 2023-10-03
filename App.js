@@ -9,11 +9,27 @@ import {
 import { Icon } from "react-native-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+const FitnessLogList = ({ logs }) => {
+  return (
+    <View>
+      {logs.map((log, index) => (
+        <View key={index} style={styles.logItem}>
+          <Text style={styles.logName}>{log.name}</Text>
+          <Text style={styles.logMinutes}>{log.minutes} minutes</Text>
+          <Text style={styles.logDate}>
+            {new Date(log.date).toLocaleDateString()}
+          </Text>
+        </View>
+      ))}
+    </View>
+  );
+};
 
 export default function App() {
   const [fitnessName, setFitnessName] = useState("");
   const [fitnessMinutes, setFitnessMinutes] = useState("");
   const [fitnessLogs, setFitnessLogs] = useState([]);
+
 
   useEffect(() => {
     const loadFitnessLogs = async () => {
@@ -64,6 +80,7 @@ export default function App() {
       <TouchableOpacity style={styles.button} onPress={handleAddFitness}>
         <Text style={styles.buttonText}>Add Fitness</Text>
       </TouchableOpacity>
+      <FitnessLogList logs={fitnessLogs} />
     </View>
   );
 }
@@ -106,5 +123,20 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  logItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  logName: {
+    flex: 1,
+    fontWeight: "bold",
+  },
+  logMinutes: {
+    marginRight: 10,
+  },
+  logDate: {
+    color: "gray",
   },
 });
