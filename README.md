@@ -7,5 +7,7 @@ An app shows random happy kitten Youtube video when you get your fitness done ğŸ
 ### Run
 
 ```bash
-$ npx expo start
+$ npm run adnroid
 ```
+
+
